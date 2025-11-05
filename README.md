@@ -1,4 +1,6 @@
 # EX-NO-9-RSA-Algorithm
+# Name:Mopuri Ankitha
+# Register Number:212223040117
 
 ## AIM:
 To Implement RSA Encryption Algorithm in Cryptography
@@ -36,11 +38,56 @@ Step 5: **Security Foundation
 The security of RSA relies on the difficulty of factoring large numbers; thus, choosing sufficiently large prime numbers for \( p \) and \( q \) is crucial for security.
 
 ## Program:
+```
+#include <stdio.h>
+#include <math.h>
+
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+int main() {
+    long long p, q, n, phi, e, d = 0, i;
+    long long msg, c, m;
+
+    p = 13;
+    q = 17;
+    n = p * q;
+    phi = (p - 1) * (q - 1);
 
 
+    e = 7;
+    while (gcd(e, phi) != 1)
+        e++;
 
+   
+    for (i = 2; i < phi; i++) {
+        if ((i * e) % phi == 1) {
+            d = i;
+            break;
+        }
+    }
+
+    printf("Public Key: (%lld, %lld)\n", e, n);
+    printf("Private Key: (%lld, %lld)\n", d, n);
+
+    printf("Enter message (number): ");
+    scanf("%lld", &msg);
+    c = (long long)pow(msg, e) % n;
+    printf("Encrypted message: %lld\n", c);
+
+    m = (long long)pow(c, d) % n;
+    printf("Decrypted message: %lld\n", m);
+
+    return 0;
+}
+
+```
 
 ## Output:
+<img width="706" height="460" alt="image" src="https://github.com/user-attachments/assets/41829ecc-d077-4afc-bd77-91ce0772cb3c" />
+
 
 
 
